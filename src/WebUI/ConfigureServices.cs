@@ -1,5 +1,5 @@
-﻿using CleanArchitecture.Application.Common.Interfaces;
-using CleanArchitecture.Infrastructure.Persistence;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Persistence;
 using CleanArchitecture.WebUI.Services;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;

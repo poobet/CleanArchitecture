@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using CleanArchitecture.Application.Common.Behaviours;
-using CleanArchitecture.Application.Common.Exceptions;
+using Application.Common.Behaviours;
+using Application.Common.Exceptions;
 using FluentValidation;
 using MediatR;
 

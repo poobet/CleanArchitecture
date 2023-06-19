@@ -1,10 +1,12 @@
-﻿using CleanArchitecture.Application.Common.Interfaces;
-using CleanArchitecture.Infrastructure.Files;
-using CleanArchitecture.Infrastructure.Identity;
-using CleanArchitecture.Infrastructure.Persistence;
-using CleanArchitecture.Infrastructure.Persistence.Interceptors;
-using CleanArchitecture.Infrastructure.Services;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Files;
+using Infrastructure.Identity;
+using Infrastructure.Middlewares;
+using Infrastructure.Persistence;
+using Infrastructure.Persistence.Interceptors;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -52,5 +54,10 @@ public static class ConfigureServices
             options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator")));
 
         return services;
+    }
+    public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<ExceptionMiddleware>();
+        return app;
     }
 }
