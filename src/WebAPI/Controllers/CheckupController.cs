@@ -1,16 +1,13 @@
-﻿using Infrastructure.Configuration;
+﻿using Application.Checkup.Queries.GetCheckup;
+using Infrastructure.Configuration;
 using Microsoft.AspNetCore.Mvc;
-
 namespace WebAPI.Controllers;
-[ApiController]
-[Route("api/[controller]")]
-public class CheckupController : Controller
+
+public class CheckupController : ApiControllerBase
 {
     [HttpGet]
-    public IActionResult Get()
+    public async Task<Checkup> Get()
     {
-        var result = "{" + $"\"AppName\":\"{ConfigurationManagerHelper.getConfig("AppName")}\", \"version\":\"{ConfigurationManagerHelper.getConfig("AppVersion")}\",\"status\",\"OK\"" + "}";
-        //var result = "{" + $"\"AppName\":\"\", \"version\":\"\",\"status\",\"OK\"" + "}";
-        return Ok(result);
+        return await Mediator.Send(new GetCheckupQuery(ConfigurationManagerHelper.getConfig("AppName"), ConfigurationManagerHelper.getConfig("AppVersion")));
     }
 }
